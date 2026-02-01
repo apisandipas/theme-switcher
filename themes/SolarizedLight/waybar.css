@@ -1,0 +1,160 @@
+/* Floating Islands - Solarized Light */
+
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "Victor Mono Nerd Font", monospace;
+    font-weight: 500;
+    font-size: 13px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: transparent;
+    color: #657b83;
+}
+
+tooltip {
+    background: #fdf6e3;
+    border-radius: 12px;
+    border: 2px solid #eee8d5;
+}
+
+tooltip label {
+    color: #657b83;
+    padding: 4px;
+}
+
+/* === WORKSPACES === */
+#workspaces {
+    background: transparent;
+    margin: 4px 0 4px 8px;
+    padding: 0;
+}
+
+#workspaces button {
+    color: #93a1a1;
+    background: #fdf6e3;
+    padding: 8px 14px;
+    margin: 6px 4px;
+    border-radius: 8px;
+    border-bottom: 3px solid transparent;
+}
+
+#workspaces button.active {
+    color: #268bd2;
+    background: #fdf6e3;
+    border-bottom: 3px solid #268bd2;
+}
+
+#workspaces button.urgent {
+    color: #dc322f;
+    background: #fdf6e3;
+    border-bottom: 3px solid #dc322f;
+}
+
+#workspaces button:hover {
+    color: #586e75;
+    background: #eee8d5;
+    border-bottom: 3px solid #93a1a1;
+}
+
+/* === CENTER CLOCK === */
+#custom-clock {
+    background: linear-gradient(135deg, #fdf6e3 0%, #eee8d5 100%);
+    color: #657b83;
+    border-radius: 16px;
+    padding: 8px 24px;
+    margin: 8px 0;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* === RIGHT MODULES GROUP === */
+#custom-weather,
+#cpu,
+#custom-cpu-temp,
+#memory,
+#battery,
+#custom-updates,
+#custom-notification,
+#tray {
+    background: linear-gradient(135deg, #fdf6e3 0%, #eee8d5 100%);
+    padding: 8px 14px;
+    margin: 8px 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Weather - First item (left rounded) */
+#custom-weather {
+    border-radius: 16px 0 0 16px;
+    margin-left: 0;
+    color: #268bd2;
+    padding-left: 16px;
+}
+
+/* CPU */
+#cpu {
+    color: #d33682;
+    border-left: 1px solid #eee8d5;
+}
+
+/* CPU Temp */
+#custom-cpu-temp {
+    color: #cb4b16;
+    border-left: 1px solid #eee8d5;
+}
+
+/* Memory */
+#memory {
+    color: #6c71c4;
+    border-left: 1px solid #eee8d5;
+}
+
+/* Battery */
+#battery {
+    color: #859900;
+    border-left: 1px solid #eee8d5;
+}
+
+#battery.warning {
+    color: #b58900;
+}
+
+#battery.critical {
+    color: #dc322f;
+}
+
+#battery.charging {
+    color: #2aa198;
+}
+
+/* Updates */
+#custom-updates {
+    color: #268bd2;
+    border-left: 1px solid #eee8d5;
+}
+
+/* Notifications */
+#custom-notification {
+    color: #cb4b16;
+    border-left: 1px solid #eee8d5;
+}
+
+/* Tray - Last item (right rounded) */
+#tray {
+    border-radius: 0 16px 16px 0;
+    margin-right: 12px;
+    padding-right: 16px;
+    border-left: 1px solid #eee8d5;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+}

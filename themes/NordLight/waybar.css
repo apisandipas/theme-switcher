@@ -1,0 +1,160 @@
+/* Floating Islands - Nord Light */
+
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "Victor Mono Nerd Font", monospace;
+    font-weight: 500;
+    font-size: 13px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: transparent;
+    color: #2e3440;
+}
+
+tooltip {
+    background: #eceff4;
+    border-radius: 12px;
+    border: 2px solid #d8dee9;
+}
+
+tooltip label {
+    color: #2e3440;
+    padding: 4px;
+}
+
+/* === WORKSPACES === */
+#workspaces {
+    background: transparent;
+    margin: 4px 0 4px 8px;
+    padding: 0;
+}
+
+#workspaces button {
+    color: #4c566a;
+    background: #eceff4;
+    padding: 8px 14px;
+    margin: 6px 4px;
+    border-radius: 8px;
+    border-bottom: 3px solid transparent;
+}
+
+#workspaces button.active {
+    color: #5e81ac;
+    background: #eceff4;
+    border-bottom: 3px solid #5e81ac;
+}
+
+#workspaces button.urgent {
+    color: #bf616a;
+    background: #eceff4;
+    border-bottom: 3px solid #bf616a;
+}
+
+#workspaces button:hover {
+    color: #2e3440;
+    background: #e5e9f0;
+    border-bottom: 3px solid #d8dee9;
+}
+
+/* === CENTER CLOCK === */
+#custom-clock {
+    background: linear-gradient(135deg, #eceff4 0%, #e5e9f0 100%);
+    color: #2e3440;
+    border-radius: 16px;
+    padding: 8px 24px;
+    margin: 8px 0;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* === RIGHT MODULES GROUP === */
+#custom-weather,
+#cpu,
+#custom-cpu-temp,
+#memory,
+#battery,
+#custom-updates,
+#custom-notification,
+#tray {
+    background: linear-gradient(135deg, #eceff4 0%, #e5e9f0 100%);
+    padding: 8px 14px;
+    margin: 8px 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Weather - First item (left rounded) */
+#custom-weather {
+    border-radius: 16px 0 0 16px;
+    margin-left: 0;
+    color: #5e81ac;
+    padding-left: 16px;
+}
+
+/* CPU */
+#cpu {
+    color: #b48ead;
+    border-left: 1px solid #d8dee9;
+}
+
+/* CPU Temp */
+#custom-cpu-temp {
+    color: #d08770;
+    border-left: 1px solid #d8dee9;
+}
+
+/* Memory */
+#memory {
+    color: #81a1c1;
+    border-left: 1px solid #d8dee9;
+}
+
+/* Battery */
+#battery {
+    color: #a3be8c;
+    border-left: 1px solid #d8dee9;
+}
+
+#battery.warning {
+    color: #ebcb8b;
+}
+
+#battery.critical {
+    color: #bf616a;
+}
+
+#battery.charging {
+    color: #8fbcbb;
+}
+
+/* Updates */
+#custom-updates {
+    color: #5e81ac;
+    border-left: 1px solid #d8dee9;
+}
+
+/* Notifications */
+#custom-notification {
+    color: #d08770;
+    border-left: 1px solid #d8dee9;
+}
+
+/* Tray - Last item (right rounded) */
+#tray {
+    border-radius: 0 16px 16px 0;
+    margin-right: 12px;
+    padding-right: 16px;
+    border-left: 1px solid #d8dee9;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+}
