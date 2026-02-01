@@ -75,13 +75,15 @@ apply_theme() {
     fi
 
     # Wallpaper
-    if [[ -f "$theme_path/wallpaper.png" ]] || [[ -f "$theme_path/wallpaper.jpg" ]]; then
-        local wallpaper
-        if [[ -f "$theme_path/wallpaper.png" ]]; then
-            wallpaper="$theme_path/wallpaper.png"
-        else
-            wallpaper="$theme_path/wallpaper.jpg"
+    local wallpaper=""
+    for ext in png jpg jpeg webp; do
+        if [[ -f "$theme_path/wallpaper.$ext" ]]; then
+            wallpaper="$theme_path/wallpaper.$ext"
+            break
         fi
+    done
+
+    if [[ -n "$wallpaper" ]]; then
 
         if command -v swww &>/dev/null; then
             # Check if swww daemon is running
