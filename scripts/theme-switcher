@@ -10,7 +10,8 @@ THEMES_DIR="$HOME/.Themes/themes"
 CURRENT_THEME_FILE="$HOME/.Themes/.current-theme"
 
 # Config locations
-KITTY_THEME="$HOME/.config/kitty/current-theme.conf"
+FOOT_CONFIG="$HOME/.config/foot/foot.ini"
+FOOT_BASE="$HOME/.Themes/foot-base.ini"
 WAYBAR_STYLE="$HOME/.config/waybar/style.css"
 ROFI_COLORS="$HOME/.config/rofi/colors.rasi"
 TMUX_THEME="$HOME/.tmux-theme.conf"
@@ -48,15 +49,13 @@ apply_theme() {
 
     echo "Applying theme: $theme_name"
 
-    # Kitty - copy color theme and reload
-    if [[ -f "$theme_path/kitty-colors.conf" ]]; then
-        cp "$theme_path/kitty-colors.conf" "$KITTY_THEME"
-        echo "  ✓ Kitty colors updated"
-        # Reload kitty by sending SIGUSR1 (it watches included files)
-        for pid in $(pgrep -x kitty); do
-            kill -SIGUSR1 "$pid" 2>/dev/null || true
-        done
-        echo "  ✓ Kitty reloaded"
+    # Foot - merge base config with theme colors
+    if [[ -f "$theme_path/foot-colors.ini" ]]; then
+        cat "$FOOT_BASE" "$theme_path/foot-colors.ini" > "$FOOT_CONFIG"
+        echo "  ✓ Foot config updated"
+        # Reload foot
+        pkill -SIGUSR1 foot 2>/dev/null || true
+        echo "  ✓ Foot reloaded"
     fi
 
     # Waybar
