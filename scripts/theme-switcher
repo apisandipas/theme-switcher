@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 # Theme Switcher
-# Switches between themes for kitty, waybar, rofi, and wallpaper
+# Switches between themes for kitty, waybar, rofi, tmux, neovim, and wallpaper
 #
 
 set -euo pipefail
@@ -13,6 +13,8 @@ CURRENT_THEME_FILE="$HOME/.Themes/.current-theme"
 KITTY_CONFIG="$HOME/.config/kitty/kitty.conf"
 WAYBAR_STYLE="$HOME/.config/waybar/style.css"
 ROFI_COLORS="$HOME/.config/rofi/colors.rasi"
+TMUX_THEME="$HOME/.tmux-theme.conf"
+NVIM_COLORSCHEME="$HOME/.config/nvim/.colorscheme"
 
 list_themes() {
     echo "Available themes:"
@@ -91,10 +93,45 @@ apply_theme() {
                 swww-daemon &
                 sleep 0.5
             fi
-            swww img "$wallpaper" --transition-type fade --transition-duration 1
+            swww img "$wallpaper" --transition-type wipe --transition-angle 45 --transition-duration 1
             echo "  ✓ Wallpaper set"
         else
             echo "  ! swww not found, skipping wallpaper"
+        fi
+    fi
+
+    # Tmux
+    if [[ -f "$theme_path/tmux.conf" ]]; then
+        cp "$theme_path/tmux.conf" "$TMUX_THEME"
+        echo "  ✓ Tmux theme updated"
+        # Reload tmux if running
+        if command -v tmux &>/dev/null && tmux list-sessions &>/dev/null; then
+            tmux source-file ~/.tmux.conf 2>/dev/null || true
+            echo "  ✓ Tmux reloaded"
+        fi
+    fi
+
+    # Neovim
+    if [[ -f "$theme_path/nvim.txt" ]]; then
+        cp "$theme_path/nvim.txt" "$NVIM_COLORSCHEME"
+        echo "  ✓ Neovim colorscheme updated"
+        # Send command to all running neovim instances via nvr if available
+        if command -v nvr &>/dev/null; then
+            local colorscheme
+            colorscheme=$(cat "$theme_path/nvim.txt")
+            # Handle rose-pine variants
+            case "$colorscheme" in
+                rose-pine-*)
+                    nvr --serverlist | xargs -I {} nvr --servername {} -c "lua require('rose-pine').setup({ variant = '${colorscheme#rose-pine-}', styles = { transparency = true } })" 2>/dev/null || true
+                    nvr --serverlist | xargs -I {} nvr --servername {} -c "colorscheme rose-pine" 2>/dev/null || true
+                    ;;
+                *)
+                    nvr --serverlist | xargs -I {} nvr --servername {} -c "colorscheme $colorscheme" 2>/dev/null || true
+                    ;;
+            esac
+            echo "  ✓ Neovim instances updated (restart for full effect)"
+        else
+            echo "  i Restart Neovim to apply colorscheme"
         fi
     fi
 
