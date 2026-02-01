@@ -115,17 +115,43 @@ apply_theme() {
         if command -v nvr &>/dev/null; then
             local colorscheme
             colorscheme=$(cat "$theme_path/nvim.txt")
-            # Handle rose-pine variants
+            # Handle variants that need special setup
             case "$colorscheme" in
                 rose-pine-*)
                     nvr --serverlist | xargs -I {} nvr --servername {} -c "lua require('rose-pine').setup({ variant = '${colorscheme#rose-pine-}', styles = { transparency = true } })" 2>/dev/null || true
                     nvr --serverlist | xargs -I {} nvr --servername {} -c "colorscheme rose-pine" 2>/dev/null || true
                     ;;
+                solarized-light)
+                    nvr --serverlist | xargs -I {} nvr --servername {} -c "set background=light" 2>/dev/null || true
+                    nvr --serverlist | xargs -I {} nvr --servername {} -c "let g:solarized_termtrans=1" 2>/dev/null || true
+                    nvr --serverlist | xargs -I {} nvr --servername {} -c "colorscheme solarized" 2>/dev/null || true
+                    ;;
+                gruvbox-light)
+                    nvr --serverlist | xargs -I {} nvr --servername {} -c "set background=light" 2>/dev/null || true
+                    nvr --serverlist | xargs -I {} nvr --servername {} -c "lua require('gruvbox').setup({ transparent_mode = true })" 2>/dev/null || true
+                    nvr --serverlist | xargs -I {} nvr --servername {} -c "colorscheme gruvbox" 2>/dev/null || true
+                    ;;
+                nord-light)
+                    nvr --serverlist | xargs -I {} nvr --servername {} -c "set background=light" 2>/dev/null || true
+                    nvr --serverlist | xargs -I {} nvr --servername {} -c "colorscheme nord" 2>/dev/null || true
+                    ;;
+                catppuccin-latte)
+                    nvr --serverlist | xargs -I {} nvr --servername {} -c "lua require('catppuccin').setup({ flavour = 'latte', transparent_background = true })" 2>/dev/null || true
+                    nvr --serverlist | xargs -I {} nvr --servername {} -c "colorscheme catppuccin" 2>/dev/null || true
+                    ;;
+                catppuccin-mocha)
+                    nvr --serverlist | xargs -I {} nvr --servername {} -c "lua require('catppuccin').setup({ flavour = 'mocha', transparent_background = true })" 2>/dev/null || true
+                    nvr --serverlist | xargs -I {} nvr --servername {} -c "colorscheme catppuccin" 2>/dev/null || true
+                    ;;
+                gruvbox|nord)
+                    nvr --serverlist | xargs -I {} nvr --servername {} -c "set background=dark" 2>/dev/null || true
+                    nvr --serverlist | xargs -I {} nvr --servername {} -c "colorscheme $colorscheme" 2>/dev/null || true
+                    ;;
                 *)
                     nvr --serverlist | xargs -I {} nvr --servername {} -c "colorscheme $colorscheme" 2>/dev/null || true
                     ;;
             esac
-            echo "  ✓ Neovim instances updated (restart for full effect)"
+            echo "  ✓ Neovim instances updated"
         else
             echo "  i Restart Neovim to apply colorscheme"
         fi
