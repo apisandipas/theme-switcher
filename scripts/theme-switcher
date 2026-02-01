@@ -10,7 +10,7 @@ THEMES_DIR="$HOME/.Themes/themes"
 CURRENT_THEME_FILE="$HOME/.Themes/.current-theme"
 
 # Config locations
-KITTY_CONFIG="$HOME/.config/kitty/kitty.conf"
+KITTY_THEME="$HOME/.config/kitty/current-theme.conf"
 WAYBAR_STYLE="$HOME/.config/waybar/style.css"
 ROFI_COLORS="$HOME/.config/rofi/colors.rasi"
 TMUX_THEME="$HOME/.tmux-theme.conf"
@@ -48,15 +48,15 @@ apply_theme() {
 
     echo "Applying theme: $theme_name"
 
-    # Kitty
-    if [[ -f "$theme_path/kitty.conf" ]]; then
-        cp "$theme_path/kitty.conf" "$KITTY_CONFIG"
-        echo "  ✓ Kitty config updated"
-        # Reload all kitty instances
-        if command -v kitty &>/dev/null; then
-            pkill -USR1 kitty 2>/dev/null || true
-            echo "  ✓ Kitty reloaded"
-        fi
+    # Kitty - copy color theme and reload
+    if [[ -f "$theme_path/kitty-colors.conf" ]]; then
+        cp "$theme_path/kitty-colors.conf" "$KITTY_THEME"
+        echo "  ✓ Kitty colors updated"
+        # Reload kitty by sending SIGUSR1 (it watches included files)
+        for pid in $(pgrep -x kitty); do
+            kill -SIGUSR1 "$pid" 2>/dev/null || true
+        done
+        echo "  ✓ Kitty reloaded"
     fi
 
     # Waybar
