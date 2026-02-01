@@ -27,7 +27,7 @@ get_theme_list() {
 }
 
 # Show rofi menu
-selected=$(get_theme_list | rofi -dmenu -i -p "Theme" -theme-str 'window {width: 300px;}')
+selected=$(get_theme_list | rofi -dmenu -i -p "Theme" -theme launcher -theme-str 'window {width: 500px;}')
 
 # Exit if nothing selected
 [[ -z "$selected" ]] && exit 0
