@@ -104,9 +104,9 @@ apply_theme() {
     if [[ -f "$theme_path/tmux.conf" ]]; then
         cp "$theme_path/tmux.conf" "$TMUX_THEME"
         echo "  ✓ Tmux theme updated"
-        # Reload tmux if running
+        # Reload just the theme file (not full config, which would re-run TPM)
         if command -v tmux &>/dev/null && tmux list-sessions &>/dev/null; then
-            tmux source-file ~/.tmux.conf 2>/dev/null || true
+            tmux source-file "$TMUX_THEME" 2>/dev/null || true
             echo "  ✓ Tmux reloaded"
         fi
     fi
