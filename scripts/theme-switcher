@@ -1,0 +1,149 @@
+#!/usr/bin/env bash
+#
+# Theme Switcher
+# Switches between themes for kitty, waybar, rofi, and wallpaper
+#
+
+set -euo pipefail
+
+THEMES_DIR="$HOME/.Themes/themes"
+CURRENT_THEME_FILE="$HOME/.Themes/.current-theme"
+
+# Config locations
+KITTY_CONFIG="$HOME/.config/kitty/kitty.conf"
+WAYBAR_STYLE="$HOME/.config/waybar/style.css"
+ROFI_COLORS="$HOME/.config/rofi/colors.rasi"
+
+list_themes() {
+    echo "Available themes:"
+    for theme_dir in "$THEMES_DIR"/*/; do
+        theme_name=$(basename "$theme_dir")
+        if [[ -f "$CURRENT_THEME_FILE" ]] && [[ "$(cat "$CURRENT_THEME_FILE")" == "$theme_name" ]]; then
+            echo "  * $theme_name (current)"
+        else
+            echo "    $theme_name"
+        fi
+    done
+}
+
+get_current_theme() {
+    if [[ -f "$CURRENT_THEME_FILE" ]]; then
+        cat "$CURRENT_THEME_FILE"
+    else
+        echo "none"
+    fi
+}
+
+apply_theme() {
+    local theme_name="$1"
+    local theme_path="$THEMES_DIR/$theme_name"
+
+    if [[ ! -d "$theme_path" ]]; then
+        echo "Error: Theme '$theme_name' not found in $THEMES_DIR"
+        list_themes
+        exit 1
+    fi
+
+    echo "Applying theme: $theme_name"
+
+    # Kitty
+    if [[ -f "$theme_path/kitty.conf" ]]; then
+        cp "$theme_path/kitty.conf" "$KITTY_CONFIG"
+        echo "  ✓ Kitty config updated"
+        # Reload all kitty instances
+        if command -v kitty &>/dev/null; then
+            pkill -USR1 kitty 2>/dev/null || true
+            echo "  ✓ Kitty reloaded"
+        fi
+    fi
+
+    # Waybar
+    if [[ -f "$theme_path/waybar.css" ]]; then
+        cp "$theme_path/waybar.css" "$WAYBAR_STYLE"
+        echo "  ✓ Waybar style updated"
+        # Reload waybar
+        if pgrep -x waybar &>/dev/null; then
+            pkill -SIGUSR2 waybar 2>/dev/null || true
+            echo "  ✓ Waybar reloaded"
+        fi
+    fi
+
+    # Rofi
+    if [[ -f "$theme_path/rofi.rasi" ]]; then
+        cp "$theme_path/rofi.rasi" "$ROFI_COLORS"
+        echo "  ✓ Rofi colors updated"
+    fi
+
+    # Wallpaper
+    if [[ -f "$theme_path/wallpaper.png" ]] || [[ -f "$theme_path/wallpaper.jpg" ]]; then
+        local wallpaper
+        if [[ -f "$theme_path/wallpaper.png" ]]; then
+            wallpaper="$theme_path/wallpaper.png"
+        else
+            wallpaper="$theme_path/wallpaper.jpg"
+        fi
+
+        if command -v swww &>/dev/null; then
+            # Check if swww daemon is running
+            if ! pgrep -x swww-daemon &>/dev/null; then
+                swww-daemon &
+                sleep 0.5
+            fi
+            swww img "$wallpaper" --transition-type fade --transition-duration 1
+            echo "  ✓ Wallpaper set"
+        else
+            echo "  ! swww not found, skipping wallpaper"
+        fi
+    fi
+
+    # Save current theme
+    echo "$theme_name" > "$CURRENT_THEME_FILE"
+    echo ""
+    echo "Theme '$theme_name' applied successfully!"
+}
+
+show_help() {
+    echo "Usage: $(basename "$0") [COMMAND] [THEME]"
+    echo ""
+    echo "Commands:"
+    echo "  apply <theme>   Apply the specified theme"
+    echo "  list            List available themes"
+    echo "  current         Show current theme"
+    echo "  help            Show this help message"
+    echo ""
+    echo "Examples:"
+    echo "  $(basename "$0") apply Original"
+    echo "  $(basename "$0") apply CatppuccinLatte"
+    echo "  $(basename "$0") list"
+}
+
+# Main
+case "${1:-help}" in
+    apply)
+        if [[ -z "${2:-}" ]]; then
+            echo "Error: Please specify a theme name"
+            list_themes
+            exit 1
+        fi
+        apply_theme "$2"
+        ;;
+    list)
+        list_themes
+        ;;
+    current)
+        echo "Current theme: $(get_current_theme)"
+        ;;
+    help|--help|-h)
+        show_help
+        ;;
+    *)
+        # If first arg looks like a theme name, apply it directly
+        if [[ -d "$THEMES_DIR/$1" ]]; then
+            apply_theme "$1"
+        else
+            echo "Unknown command: $1"
+            show_help
+            exit 1
+        fi
+        ;;
+esac

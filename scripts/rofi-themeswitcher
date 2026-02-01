@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+#
+# Rofi Theme Switcher
+# A rofi-based GUI for switching themes
+#
+
+THEMES_DIR="$HOME/.Themes/themes"
+THEME_SWITCHER="$HOME/.Themes/scripts/theme-switcher"
+CURRENT_THEME_FILE="$HOME/.Themes/.current-theme"
+
+# Get current theme
+current=""
+if [[ -f "$CURRENT_THEME_FILE" ]]; then
+    current=$(cat "$CURRENT_THEME_FILE")
+fi
+
+# Build theme list for rofi
+get_theme_list() {
+    for theme_dir in "$THEMES_DIR"/*/; do
+        theme_name=$(basename "$theme_dir")
+        if [[ "$theme_name" == "$current" ]]; then
+            echo "● $theme_name"
+        else
+            echo "  $theme_name"
+        fi
+    done
+}
+
+# Show rofi menu
+selected=$(get_theme_list | rofi -dmenu -i -p "Theme" -theme-str 'window {width: 300px;}')
+
+# Exit if nothing selected
+[[ -z "$selected" ]] && exit 0
+
+# Clean up selection (remove leading marker/spaces)
+theme_name=$(echo "$selected" | sed 's/^[● ]*//')
+
+# Apply theme
+if [[ -n "$theme_name" ]] && [[ -d "$THEMES_DIR/$theme_name" ]]; then
+    "$THEME_SWITCHER" apply "$theme_name"
+fi
