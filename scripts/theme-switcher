@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 # Theme Switcher
-# Switches between themes for alacritty, foot, waybar, rofi, tmux, neovim, and wallpaper
+# Switches between themes for alacritty, waybar, rofi, tmux, neovim, and wallpaper
 #
 
 set -euo pipefail
@@ -10,8 +10,6 @@ THEMES_DIR="$HOME/.Themes/themes"
 CURRENT_THEME_FILE="$HOME/.Themes/.current-theme"
 
 # Config locations
-FOOT_CONFIG="$HOME/.config/foot/foot.ini"
-FOOT_BASE="$HOME/.Themes/foot-base.ini"
 ALACRITTY_CONFIG="$HOME/.config/alacritty/alacritty.toml"
 ALACRITTY_BASE="$HOME/.Themes/alacritty-base.toml"
 WAYBAR_STYLE="$HOME/.config/waybar/style.css"
@@ -50,22 +48,6 @@ apply_theme() {
     fi
 
     echo "Applying theme: $theme_name"
-
-    # Foot - merge base config with theme colors
-    if [[ -f "$theme_path/foot-colors.ini" ]]; then
-        cat "$FOOT_BASE" "$theme_path/foot-colors.ini" > "$FOOT_CONFIG"
-        echo "  ✓ Foot config updated"
-        # Restart foot server if running (for live theme switching)
-        if pgrep -f "foot --server" &>/dev/null; then
-            pkill -f "foot --server" 2>/dev/null || true
-            sleep 0.2
-            foot --server &>/dev/null &
-            disown
-            echo "  ✓ Foot server restarted"
-        else
-            echo "  i Open new foot terminal for colors"
-        fi
-    fi
 
     # Alacritty - merge base config with theme colors (auto-reloads)
     if [[ -f "$theme_path/alacritty-colors.toml" ]]; then
