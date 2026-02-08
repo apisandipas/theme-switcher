@@ -1,4 +1,4 @@
-/* Floating Islands - Catppuccin Latte */
+/* Floating Islands - Tokyo Night (Storm) */
 
 * {
     border: none;
@@ -11,37 +11,37 @@
 
 window#waybar {
     background: transparent;
-    color: #4c4f69;
+    color: #c0caf5;
 }
 
 tooltip {
-    background: #e6e9ef;
+    background: #24283b;
     border-radius: 4px;
-    border: 2px solid #ccd0da;
+    border: 2px solid #3b4261;
 }
 
 tooltip label {
-    color: #4c4f69;
+    color: #c0caf5;
     padding: 4px;
 }
 
 /* === WORKSPACES === */
 #workspaces {
-    background: linear-gradient(135deg, #e6e9ef 0%, #dce0e8 100%);
+    background: linear-gradient(135deg, #24283b 0%, #1f2335 100%);
     margin: 8px 0 8px 16px;
     padding: 0;
     border-radius: 4px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 #workspaces button {
-    color: #6c6f85;
+    color: #565f89;
     background: transparent;
     padding: 8px 14px;
     margin: 0;
     border-radius: 0;
     border-bottom: 3px solid transparent;
-    border-left: 1px solid #ccd0da;
+    border-left: 1px solid #3b4261;
 }
 
 #workspaces button:first-child {
@@ -56,34 +56,34 @@ tooltip label {
 }
 
 #workspaces button.active {
-    color: #1e66f5;
+    color: #7aa2f7;
     background: transparent;
-    border-bottom: 3px solid #1e66f5;
+    border-bottom: 3px solid #7aa2f7;
 }
 
 #workspaces button.urgent {
-    color: #d20f39;
+    color: #f7768e;
     background: transparent;
-    border-bottom: 3px solid #d20f39;
+    border-bottom: 3px solid #f7768e;
 }
 
 #workspaces button:hover {
-    color: #4c4f69;
-    background: rgba(0, 0, 0, 0.06);
-    border-bottom: 3px solid #bcc0cc;
+    color: #c0caf5;
+    background: rgba(255, 255, 255, 0.08);
+    border-bottom: 3px solid #414868;
 }
 
 /* === CENTER CLOCK === */
 #custom-clock {
-    background: linear-gradient(135deg, #e6e9ef 0%, #dce0e8 100%);
-    color: #4c4f69;
+    background: linear-gradient(135deg, #24283b 0%, #1f2335 100%);
+    color: #c0caf5;
     border-radius: 4px;
     padding: 8px 24px;
     margin: 8px 0;
     font-size: 14px;
     font-weight: 600;
     letter-spacing: 1px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 /* === RIGHT MODULES GROUP === */
@@ -95,66 +95,66 @@ tooltip label {
 #custom-updates,
 #custom-notification,
 #tray {
-    background: linear-gradient(135deg, #e6e9ef 0%, #dce0e8 100%);
+    background: linear-gradient(135deg, #24283b 0%, #1f2335 100%);
     padding: 8px 14px;
     margin: 8px 0;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 /* Weather - First item (left rounded) */
 #custom-weather {
     border-radius: 4px 0 0 4px;
     margin-left: 0;
-    color: #04a5e5;
+    color: #7dcfff;
     padding-left: 16px;
 }
 
 /* CPU */
 #cpu {
-    color: #ea76cb;
-    border-left: 1px solid #ccd0da;
+    color: #bb9af7;
+    border-left: 1px solid #3b4261;
 }
 
 /* CPU Temp */
 #custom-cpu-temp {
-    color: #fe640b;
-    border-left: 1px solid #ccd0da;
+    color: #ff9e64;
+    border-left: 1px solid #3b4261;
 }
 
 /* Memory */
 #memory {
-    color: #8839ef;
-    border-left: 1px solid #ccd0da;
+    color: #9d7cd8;
+    border-left: 1px solid #3b4261;
 }
 
 /* Battery */
 #battery {
-    color: #40a02b;
-    border-left: 1px solid #ccd0da;
+    color: #9ece6a;
+    border-left: 1px solid #3b4261;
 }
 
 #battery.warning {
-    color: #df8e1d;
+    color: #e0af68;
 }
 
 #battery.critical {
-    color: #d20f39;
+    color: #f7768e;
 }
 
 #battery.charging {
-    color: #179299;
+    color: #73daca;
 }
 
 /* Updates */
 #custom-updates {
-    color: #1e66f5;
-    border-left: 1px solid #ccd0da;
+    color: #7aa2f7;
+    border-left: 1px solid #3b4261;
 }
 
 /* Notifications */
 #custom-notification {
-    color: #fe640b;
-    border-left: 1px solid #ccd0da;
+    color: #ff9e64;
+    border-left: 1px solid #3b4261;
 }
 
 /* Tray - Last item (right rounded) */
@@ -162,7 +162,7 @@ tooltip label {
     border-radius: 0 4px 4px 0;
     margin-right: 12px;
     padding-right: 16px;
-    border-left: 1px solid #ccd0da;
+    border-left: 1px solid #3b4261;
 }
 
 #tray > .passive {

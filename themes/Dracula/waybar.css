@@ -1,4 +1,4 @@
-/* Floating Islands - Catppuccin Latte */
+/* Floating Islands - Dracula */
 
 * {
     border: none;
@@ -11,37 +11,37 @@
 
 window#waybar {
     background: transparent;
-    color: #4c4f69;
+    color: #f8f8f2;
 }
 
 tooltip {
-    background: #e6e9ef;
+    background: #282a36;
     border-radius: 4px;
-    border: 2px solid #ccd0da;
+    border: 2px solid #44475a;
 }
 
 tooltip label {
-    color: #4c4f69;
+    color: #f8f8f2;
     padding: 4px;
 }
 
 /* === WORKSPACES === */
 #workspaces {
-    background: linear-gradient(135deg, #e6e9ef 0%, #dce0e8 100%);
+    background: linear-gradient(135deg, #282a36 0%, #21222c 100%);
     margin: 8px 0 8px 16px;
     padding: 0;
     border-radius: 4px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 #workspaces button {
-    color: #6c6f85;
+    color: #6272a4;
     background: transparent;
     padding: 8px 14px;
     margin: 0;
     border-radius: 0;
     border-bottom: 3px solid transparent;
-    border-left: 1px solid #ccd0da;
+    border-left: 1px solid #44475a;
 }
 
 #workspaces button:first-child {
@@ -56,34 +56,34 @@ tooltip label {
 }
 
 #workspaces button.active {
-    color: #1e66f5;
+    color: #bd93f9;
     background: transparent;
-    border-bottom: 3px solid #1e66f5;
+    border-bottom: 3px solid #bd93f9;
 }
 
 #workspaces button.urgent {
-    color: #d20f39;
+    color: #ff5555;
     background: transparent;
-    border-bottom: 3px solid #d20f39;
+    border-bottom: 3px solid #ff5555;
 }
 
 #workspaces button:hover {
-    color: #4c4f69;
-    background: rgba(0, 0, 0, 0.06);
-    border-bottom: 3px solid #bcc0cc;
+    color: #f8f8f2;
+    background: rgba(255, 255, 255, 0.08);
+    border-bottom: 3px solid #44475a;
 }
 
 /* === CENTER CLOCK === */
 #custom-clock {
-    background: linear-gradient(135deg, #e6e9ef 0%, #dce0e8 100%);
-    color: #4c4f69;
+    background: linear-gradient(135deg, #282a36 0%, #21222c 100%);
+    color: #f8f8f2;
     border-radius: 4px;
     padding: 8px 24px;
     margin: 8px 0;
     font-size: 14px;
     font-weight: 600;
     letter-spacing: 1px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 /* === RIGHT MODULES GROUP === */
@@ -95,66 +95,66 @@ tooltip label {
 #custom-updates,
 #custom-notification,
 #tray {
-    background: linear-gradient(135deg, #e6e9ef 0%, #dce0e8 100%);
+    background: linear-gradient(135deg, #282a36 0%, #21222c 100%);
     padding: 8px 14px;
     margin: 8px 0;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 /* Weather - First item (left rounded) */
 #custom-weather {
     border-radius: 4px 0 0 4px;
     margin-left: 0;
-    color: #04a5e5;
+    color: #8be9fd;
     padding-left: 16px;
 }
 
 /* CPU */
 #cpu {
-    color: #ea76cb;
-    border-left: 1px solid #ccd0da;
+    color: #ff79c6;
+    border-left: 1px solid #44475a;
 }
 
 /* CPU Temp */
 #custom-cpu-temp {
-    color: #fe640b;
-    border-left: 1px solid #ccd0da;
+    color: #ffb86c;
+    border-left: 1px solid #44475a;
 }
 
 /* Memory */
 #memory {
-    color: #8839ef;
-    border-left: 1px solid #ccd0da;
+    color: #bd93f9;
+    border-left: 1px solid #44475a;
 }
 
 /* Battery */
 #battery {
-    color: #40a02b;
-    border-left: 1px solid #ccd0da;
+    color: #50fa7b;
+    border-left: 1px solid #44475a;
 }
 
 #battery.warning {
-    color: #df8e1d;
+    color: #f1fa8c;
 }
 
 #battery.critical {
-    color: #d20f39;
+    color: #ff5555;
 }
 
 #battery.charging {
-    color: #179299;
+    color: #8be9fd;
 }
 
 /* Updates */
 #custom-updates {
-    color: #1e66f5;
-    border-left: 1px solid #ccd0da;
+    color: #8be9fd;
+    border-left: 1px solid #44475a;
 }
 
 /* Notifications */
 #custom-notification {
-    color: #fe640b;
-    border-left: 1px solid #ccd0da;
+    color: #ffb86c;
+    border-left: 1px solid #44475a;
 }
 
 /* Tray - Last item (right rounded) */
@@ -162,7 +162,7 @@ tooltip label {
     border-radius: 0 4px 4px 0;
     margin-right: 12px;
     padding-right: 16px;
-    border-left: 1px solid #ccd0da;
+    border-left: 1px solid #44475a;
 }
 
 #tray > .passive {

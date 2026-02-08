@@ -16,7 +16,7 @@ window#waybar {
 
 tooltip {
     background: #eceff4;
-    border-radius: 12px;
+    border-radius: 4px;
     border: 2px solid #d8dee9;
 }
 
@@ -27,35 +27,49 @@ tooltip label {
 
 /* === WORKSPACES === */
 #workspaces {
-    background: transparent;
-    margin: 4px 0 4px 8px;
+    background: linear-gradient(135deg, #eceff4 0%, #e5e9f0 100%);
+    margin: 8px 0 8px 16px;
     padding: 0;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 #workspaces button {
     color: #4c566a;
-    background: #eceff4;
+    background: transparent;
     padding: 8px 14px;
-    margin: 6px 4px;
-    border-radius: 8px;
+    margin: 0;
+    border-radius: 0;
     border-bottom: 3px solid transparent;
+    border-left: 1px solid #d8dee9;
+}
+
+#workspaces button:first-child {
+    border-left: none;
+    border-radius: 4px 0 0 4px;
+    padding-left: 16px;
+}
+
+#workspaces button:last-child {
+    border-radius: 0 4px 4px 0;
+    padding-right: 16px;
 }
 
 #workspaces button.active {
     color: #5e81ac;
-    background: #eceff4;
+    background: transparent;
     border-bottom: 3px solid #5e81ac;
 }
 
 #workspaces button.urgent {
     color: #bf616a;
-    background: #eceff4;
+    background: transparent;
     border-bottom: 3px solid #bf616a;
 }
 
 #workspaces button:hover {
     color: #2e3440;
-    background: #e5e9f0;
+    background: rgba(0, 0, 0, 0.06);
     border-bottom: 3px solid #d8dee9;
 }
 
@@ -63,7 +77,7 @@ tooltip label {
 #custom-clock {
     background: linear-gradient(135deg, #eceff4 0%, #e5e9f0 100%);
     color: #2e3440;
-    border-radius: 16px;
+    border-radius: 4px;
     padding: 8px 24px;
     margin: 8px 0;
     font-size: 14px;
@@ -89,7 +103,7 @@ tooltip label {
 
 /* Weather - First item (left rounded) */
 #custom-weather {
-    border-radius: 16px 0 0 16px;
+    border-radius: 4px 0 0 4px;
     margin-left: 0;
     color: #5e81ac;
     padding-left: 16px;
@@ -145,7 +159,7 @@ tooltip label {
 
 /* Tray - Last item (right rounded) */
 #tray {
-    border-radius: 0 16px 16px 0;
+    border-radius: 0 4px 4px 0;
     margin-right: 12px;
     padding-right: 16px;
     border-left: 1px solid #d8dee9;
